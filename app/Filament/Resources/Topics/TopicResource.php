@@ -52,7 +52,7 @@ class TopicResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListTopics::route('/'),
+            // 'index' => ListTopics::route('/'),
             'create' => CreateTopic::route('/create'),
             'view' => ViewTopic::route('/{record}'),
             'edit' => EditTopic::route('/{record}/edit'),

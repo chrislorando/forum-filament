@@ -66,7 +66,7 @@ class BoardResource extends Resource
     {
         return [
             'index' => ListBoards::route('/'),
-            'create' => CreateBoard::route('/create'),
+            // 'create' => CreateBoard::route('/create'),
             'view' => ViewBoard::route('/{record}'),
             'edit' => EditBoard::route('/{record}/edit'),
         ];
@@ -78,5 +78,10 @@ class BoardResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->canManage();
     }
 }

@@ -126,4 +126,14 @@ class CategoryResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->canManage();
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->canManage();
+    }
 }
