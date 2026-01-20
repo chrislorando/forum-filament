@@ -1,5 +1,7 @@
 # Forum App
 
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/5fe91828-acf8-407e-9c2e-ff433781293e" />
+
 A community discussion platform built with Laravel, Filament, and Tailwind CSS.
 It focuses on providing a clean, modern interface for both users and moderators.
 
