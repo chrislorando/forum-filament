@@ -5,13 +5,8 @@ namespace App\Filament\Resources\Boards\RelationManagers;
 use App\Enums\PostType;
 use App\Enums\TopicStatus;
 use App\Filament\Resources\Topics\TopicResource;
-use App\Models\Board;
-use App\Models\Post;
 use App\Models\Topic;
-use Filament\Actions\Action;
-use Filament\Actions\AttachAction;
 use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -45,15 +40,16 @@ class TopicsRelationManager extends RelationManager
                     ->mutateDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
                         $data['slug'] = \Str::slug($data['title']);
-                        if(isset($data['status']) && $data['status']==TopicStatus::Pinned){
+                        if (isset($data['status']) && $data['status'] == TopicStatus::Pinned) {
                             $data['is_pinned'] = true;
                         }
+
                         return $data;
                     })
                     ->after(function (Model $record, array $data): void {
                         $record->posts()->create([
                             'type' => PostType::FirstPost,
-                            'content' => $data['description'], 
+                            'content' => $data['description'],
                             'user_id' => auth()->id(),
                         ]);
                     })
@@ -62,14 +58,14 @@ class TopicsRelationManager extends RelationManager
                     ->modalWidth(Width::Large)
                     ->createAnother(false)
                     ->visible(fn ($record): bool => auth()->check() ?? false),
-            ])            
+            ])
             ->extraAttributes([
-                'class' => 'mt-6'
+                'class' => 'mt-6',
             ]);
     }
 
     public function isReadOnly(): bool
     {
-        return false; 
+        return false;
     }
 }

@@ -5,20 +5,15 @@ namespace App\Filament\Resources\Topics\Tables;
 use App\Enums\TopicStatus;
 use App\Filament\Resources\Topics\TopicResource;
 use App\Models\Topic;
-use Filament\Actions\Action;
-use Filament\Actions\AttachAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DetachAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\Width;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -32,7 +27,7 @@ class TopicsTable
         return $table
             ->modifyQueryUsing(function (Builder $query, Table $table) {
                 return $query
-                    ->orderBy('is_pinned', 'desc') 
+                    ->orderBy('is_pinned', 'desc')
                     ->orderBy('title', 'asc');
             })
             ->recordUrl(
@@ -53,42 +48,44 @@ class TopicsTable
                     ->label('Views')
                     ->alignEnd(),
                 TextColumn::make('latestPost.created_at')
-                    ->description(function($record){return 'By '. $record->latestPost->user->name;})
+                    ->description(function ($record) {
+                        return 'By '.$record->latestPost->user->name;
+                    })
                     ->dateTime('M d, Y H:i:s')
                     ->size('xs')
                     ->color('gray')
                     ->default(''),
-                            
+
             ])
             ->filters([
                 TrashedFilter::make()
-                ->visible(fn() => auth()->user()?->canManage()),
+                    ->visible(fn () => auth()->user()?->canManage()),
             ])
 
             ->recordActions([
                 // ViewAction::make(),
                 EditAction::make()
-                ->modal()
-                ->slideOver()
-                ->modalWidth(Width::Large)
-                ->mutateDataUsing(function (array $data): array {
+                    ->modal()
+                    ->slideOver()
+                    ->modalWidth(Width::Large)
+                    ->mutateDataUsing(function (array $data): array {
 
-                    $data['is_pinned'] = $data['status']==TopicStatus::Pinned ? true : false;
-                    $data['is_locked'] = $data['status']==TopicStatus::Locked ? true : false;
+                        $data['is_pinned'] = $data['status'] == TopicStatus::Pinned ? true : false;
+                        $data['is_locked'] = $data['status'] == TopicStatus::Locked ? true : false;
 
-                    return $data;
-                })
-                ->visible(fn ($record): bool => auth()->check() && (auth()->id() == $record->user_id || auth()->user()?->canManage()) ?? false),
+                        return $data;
+                    })
+                    ->visible(fn ($record): bool => auth()->check() && (auth()->id() == $record->user_id || auth()->user()?->canManage()) ?? false),
                 DeleteAction::make()
-                ->visible(fn ($record): bool => auth()->check() && (auth()->id() == $record->user_id || auth()->user()?->canManage()) ?? false),
-                RestoreAction::make()
+                    ->visible(fn ($record): bool => auth()->check() && (auth()->id() == $record->user_id || auth()->user()?->canManage()) ?? false),
+                RestoreAction::make(),
                 // ->visible(fn ($record): bool => auth()->check() && (auth()->id() == $record->user_id || auth()->user()?->canManage()) ?? false),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make()->visible(fn() => auth()->user()?->canManage()),
-                    ForceDeleteBulkAction::make()->visible(fn() => auth()->user()?->canManage()),
-                    RestoreBulkAction::make()->visible(fn() => auth()->user()?->canManage()),
+                    DeleteBulkAction::make()->visible(fn () => auth()->user()?->canManage()),
+                    ForceDeleteBulkAction::make()->visible(fn () => auth()->user()?->canManage()),
+                    RestoreBulkAction::make()->visible(fn () => auth()->user()?->canManage()),
                 ]),
             ])
             ->paginated([50])

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Boards\Schemas;
 
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class BoardForm
@@ -34,7 +34,7 @@ class BoardForm
                 Textarea::make('description')
                     ->columnSpanFull()
                     ->columnSpanFull(),
-                
+
             ]);
     }
 }

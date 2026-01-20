@@ -14,7 +14,7 @@ enum TopicStatus: string implements HasColor, HasIcon, HasLabel
     case Pinned = 'pinned';
     case Moved = 'moved';
 
-    public function getLabel(): string | Htmlable | null
+    public function getLabel(): string|Htmlable|null
     {
         return match ($this) {
             self::Normal => 'Normal',
@@ -24,7 +24,7 @@ enum TopicStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Normal => 'gray',
@@ -34,7 +34,7 @@ enum TopicStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | Htmlable | null
+    public function getIcon(): string|Htmlable|null
     {
         return match ($this) {
             self::Normal => 'heroicon-m-document-text',

@@ -51,9 +51,9 @@ class BoardResource extends Resource
         return [
             RelationGroup::make('Forum', [
                 ChildrenRelationManager::class,
-                TopicsRelationManager::class
+                TopicsRelationManager::class,
             ]),
-            
+
         ];
     }
 

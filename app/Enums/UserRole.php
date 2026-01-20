@@ -13,7 +13,7 @@ enum UserRole: string implements HasColor, HasIcon, HasLabel
     case Moderator = 'moderator';
     case Member = 'member';
 
-    public function getLabel(): string | Htmlable | null
+    public function getLabel(): string|Htmlable|null
     {
         return match ($this) {
             self::Admin => 'Admin',
@@ -22,7 +22,7 @@ enum UserRole: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Admin => 'danger',
@@ -31,7 +31,7 @@ enum UserRole: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | Htmlable | null
+    public function getIcon(): string|Htmlable|null
     {
         return match ($this) {
             self::Admin => 'heroicon-m-shield-check',

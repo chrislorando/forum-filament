@@ -62,6 +62,4 @@ class Topic extends Model
     {
         return 'slug';
     }
-
-
 }

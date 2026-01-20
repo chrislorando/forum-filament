@@ -10,7 +10,7 @@ class ViewBoard extends ViewRecord
 {
     protected static string $resource = BoardResource::class;
 
-    public function getTitle(): string 
+    public function getTitle(): string
     {
         return $this->record->name;
     }
@@ -21,7 +21,7 @@ class ViewBoard extends ViewRecord
             // EditAction::make()->visible(fn() => auth()->user()?->canManage()),
         ];
     }
-    
+
     // public function getHeader(): ?\Illuminate\Contracts\View\View
     // {
     //     // Remove space for hidden infolist
@@ -29,7 +29,7 @@ class ViewBoard extends ViewRecord
     //         'panels::content.start',
     //         fn (): string => '<style>
     //             .fi-in.fi-resource-infolist-container { display: none !important; }
-    //             .fi-sc-has-gap { gap: 0 !important; } 
+    //             .fi-sc-has-gap { gap: 0 !important; }
     //             .fi-sc-has-gap > * + * { margin-top: 0 !important; }
     //         </style>',
     //     );
@@ -68,5 +68,4 @@ class ViewBoard extends ViewRecord
 
         return $breadcrumbs;
     }
-
 }

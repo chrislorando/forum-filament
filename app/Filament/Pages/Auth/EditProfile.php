@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages\Auth;
 
-use Filament\Actions\Action;
 use Filament\Auth\Pages\EditProfile as BaseEditProfile;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\MarkdownEditor;
@@ -10,7 +9,6 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 
 class EditProfile extends BaseEditProfile
 {
@@ -23,14 +21,14 @@ class EditProfile extends BaseEditProfile
         return $schema
             ->columns(1)
             ->components([
-              
+
                 Section::make('Profile Information')
                     ->columns(1)
                     ->schema([
                         $this->getNameFormComponent(),
                         $this->getEmailFormComponent(),
                         TextInput::make('username')->required()->unique(),
-                        MarkdownEditor::make('signature')
+                        MarkdownEditor::make('signature'),
                         // $this->getPasswordFormComponent(),
                         // $this->getPasswordConfirmationFormComponent(),
                     ]),
@@ -55,12 +53,12 @@ class EditProfile extends BaseEditProfile
                         TextInput::make('password')
                             ->password()
                             ->confirmed()
-                            ->required(fn($get) => $get('change_password'))
-                            ->disabled(fn($get) => !$get('change_password')),
+                            ->required(fn ($get) => $get('change_password'))
+                            ->disabled(fn ($get) => ! $get('change_password')),
                         TextInput::make('password_confirmation')
                             ->password()
-                            ->required(fn($get) => $get('change_password'))
-                            ->disabled(fn($get) => !$get('change_password'))
+                            ->required(fn ($get) => $get('change_password'))
+                            ->disabled(fn ($get) => ! $get('change_password'))
                             ->dehydrated(false),
                     ]),
             ]);

@@ -12,7 +12,7 @@ enum PostType: string implements HasColor, HasIcon, HasLabel
     case FirstPost = 'first_post';
     case Reply = 'reply';
 
-    public function getLabel(): string | Htmlable | null
+    public function getLabel(): string|Htmlable|null
     {
         return match ($this) {
             self::FirstPost => 'First Post',
@@ -20,7 +20,7 @@ enum PostType: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::FirstPost => 'primary',
@@ -28,7 +28,7 @@ enum PostType: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | Htmlable | null
+    public function getIcon(): string|Htmlable|null
     {
         return match ($this) {
             self::FirstPost => 'heroicon-m-star',

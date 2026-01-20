@@ -13,14 +13,13 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,12 +39,12 @@ class CategoryResource extends Resource
             ->components([
                 Grid::make()->schema([
                     TextInput::make('sort_order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
+                        ->required()
+                        ->numeric()
+                        ->default(0),
                 ])
-                ->columnSpanFull(),
-                
+                    ->columnSpanFull(),
+
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255)
@@ -59,8 +58,7 @@ class CategoryResource extends Resource
                     ->maxLength(255)
                     ->unique(ignoreRecord: true)
                     ->dehydrated(),
-            
-              
+
                 Textarea::make('description')
                     ->columnSpanFull(),
             ]);

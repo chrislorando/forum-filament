@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Boards\Tables;
 
-use App\Enums\UserRole;
 use App\Filament\Resources\Boards\BoardResource;
 use App\Models\Board;
 use Filament\Actions\BulkActionGroup;
@@ -15,7 +14,6 @@ use Filament\Actions\ViewAction;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\Layout\Grid;
-use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -30,6 +28,7 @@ class BoardsTable
         return $table
             ->modifyQueryUsing(function (Builder $query, Table $table) {
                 $livewire = $table->getLivewire();
+
                 return $query
                     ->join('categories', 'boards.category_id', '=', 'categories.id')
                     ->select('boards.*')
@@ -58,66 +57,66 @@ class BoardsTable
             ->columns([
                 Grid::make([
                     'default' => 1,
-                    'lg' => 12
+                    'lg' => 12,
                 ])
-                ->schema([
-                    // 1. Board Info (Ambil 6 dari 12 bagian)
-                     Stack::make([
-                        TextColumn::make('name')
-                            ->weight('bold'),
-                        TextColumn::make('description')
-                            ->size('sm')
-                            ->color('gray')
-                            ->wrap(),
-                        TextColumn::make('children.name') 
-                            ->label('Sub-Boards')
-                            ->size('xs')
-                            ->color('info')
-                            ->badge()
-                    ])->columnSpan(6), 
+                    ->schema([
+                        // 1. Board Info (Ambil 6 dari 12 bagian)
+                        Stack::make([
+                            TextColumn::make('name')
+                                ->weight('bold'),
+                            TextColumn::make('description')
+                                ->size('sm')
+                                ->color('gray')
+                                ->wrap(),
+                            TextColumn::make('children.name')
+                                ->label('Sub-Boards')
+                                ->size('xs')
+                                ->color('info')
+                                ->badge(),
+                        ])->columnSpan(6),
 
-                    // 2. Statistik (Ambil 2 dari 12 bagian)
-                    Stack::make([
-                        TextColumn::make('posts_count')
-                            ->state(fn ($record) => "Posts: " . ($record->posts_count ?? 0))
-                            ->size('xs')
-                            ->color('gray'),
-                        TextColumn::make('topics_count')
-                            ->state(fn ($record) => "Topics: " . ($record->topics_count ?? 0))
-                            ->size('xs')
-                            ->color('gray'),
-                    ])
-                    ->columnSpan(2)
-                    ->alignment(Alignment::Start),
+                        // 2. Statistik (Ambil 2 dari 12 bagian)
+                        Stack::make([
+                            TextColumn::make('posts_count')
+                                ->state(fn ($record) => 'Posts: '.($record->posts_count ?? 0))
+                                ->size('xs')
+                                ->color('gray'),
+                            TextColumn::make('topics_count')
+                                ->state(fn ($record) => 'Topics: '.($record->topics_count ?? 0))
+                                ->size('xs')
+                                ->color('gray'),
+                        ])
+                            ->columnSpan(2)
+                            ->alignment(Alignment::Start),
 
-                    // 3. Last Post (Ambil 4 dari 12 bagian)
-                    Stack::make([
-                        TextColumn::make('latestPost.user.name')
-                            ->prefix('Last post by ')
-                            ->weight('bold')
-                            ->size('xs')
-                            ->color('primary')
-                            ->default('No posts yet'),
-                        
-                        TextColumn::make('latestPost.topic.title')
-                            ->prefix('in ')
-                            ->size('xs')
-                            ->limit(35)
-                            ->default(''),
+                        // 3. Last Post (Ambil 4 dari 12 bagian)
+                        Stack::make([
+                            TextColumn::make('latestPost.user.name')
+                                ->prefix('Last post by ')
+                                ->weight('bold')
+                                ->size('xs')
+                                ->color('primary')
+                                ->default('No posts yet'),
 
-                        TextColumn::make('latestPost.created_at')
-                            ->dateTime('M d, Y')
-                            ->prefix('on ')
-                            ->size('xs')
-                            ->color('gray')
-                            ->default(''),
-                    ])
-                    ->columnSpan(4)
-                    ->visible(fn ($record) => $record->id !== null),
-                ])
+                            TextColumn::make('latestPost.topic.title')
+                                ->prefix('in ')
+                                ->size('xs')
+                                ->limit(35)
+                                ->default(''),
+
+                            TextColumn::make('latestPost.created_at')
+                                ->dateTime('M d, Y')
+                                ->prefix('on ')
+                                ->size('xs')
+                                ->color('gray')
+                                ->default(''),
+                        ])
+                            ->columnSpan(4)
+                            ->visible(fn ($record) => $record->id !== null),
+                    ]),
             ])
             ->filters([
-                TrashedFilter::make()->visible(fn() => auth()->user()?->canManage()),
+                TrashedFilter::make()->visible(fn () => auth()->user()?->canManage()),
             ])
             ->recordActions([
                 // ViewAction::make()->visible(fn() => auth()->user()?->canManage()),
@@ -125,8 +124,8 @@ class BoardsTable
                     ->modal()
                     ->slideOver()
                     ->modalWidth(Width::Large)
-                    ->visible(fn() => auth()->user()?->canManage()),
-                DeleteAction::make()->visible(fn() => auth()->user()?->canManage()),
+                    ->visible(fn () => auth()->user()?->canManage()),
+                DeleteAction::make()->visible(fn () => auth()->user()?->canManage()),
             ])
             // ->toolbarActions([
             //     BulkActionGroup::make([

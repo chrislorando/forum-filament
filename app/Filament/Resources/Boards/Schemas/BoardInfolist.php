@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Boards\Schemas;
 use App\Models\Board;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Group;
 use Filament\Schemas\Schema;
 
 class BoardInfolist
@@ -15,8 +14,8 @@ class BoardInfolist
         return $schema
             ->components([
                 Grid::make([])
-                ->columnSpanFull()
-                ->extraAttributes(['class' => 'hidden p-0'])
+                    ->columnSpanFull()
+                    ->extraAttributes(['class' => 'hidden p-0']),
                 // TextEntry::make('category.name')
                 //     ->label('Category'),
                 // TextEntry::make('parent.name')

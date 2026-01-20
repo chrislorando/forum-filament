@@ -23,7 +23,7 @@ class BoardFactory extends Factory
             'Market Updates', 'Price Discussion', 'Mining Discussion', 'Staking Rewards',
             'DeFi Projects', 'NFT Marketplace', 'Crypto Adoption', 'Regulation News',
             'Security Tips', 'Wallet Discussion', 'Exchange Review', 'Project Announcement',
-            'Community Events', 'Meme Coins', 'Yield Farming', 'Liquidity Mining'
+            'Community Events', 'Meme Coins', 'Yield Farming', 'Liquidity Mining',
         ];
 
         $name = fake()->unique()->randomElement($names);

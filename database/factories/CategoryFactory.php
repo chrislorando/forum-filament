@@ -21,7 +21,7 @@ class CategoryFactory extends Factory
             'Teknologi Blockchain', 'Regulasi Crypto', 'NFT & DeFi',
             'Ethereum', 'DeFi', 'Solana', 'Cardano', 'Polygon',
             'Aave', 'Uniswap', 'Chainlink', 'Polkadot', 'Avalanche',
-            'Cosmos', 'Binance', 'Kripto Indonesia', 'Diskusi Umum', 'Berita'
+            'Cosmos', 'Binance', 'Kripto Indonesia', 'Diskusi Umum', 'Berita',
         ];
 
         $name = fake()->unique()->randomElement($names);

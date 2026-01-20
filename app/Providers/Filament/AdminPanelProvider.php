@@ -5,8 +5,6 @@ namespace App\Providers\Filament;
 use App\Filament\AvatarProvider\BoringAvatarsProvider;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Resources\Boards\BoardResource;
-use App\Filament\Resources\Categories\CategoryResource;
-use App\Filament\Resources\Topics\RelationManagers\PostsRelationManager;
 use Filament\Auth\Pages\Login;
 use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
@@ -14,6 +12,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -27,10 +27,8 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationItem;
+
 use function Filament\Support\original_request;
 
 class AdminPanelProvider extends PanelProvider
@@ -82,7 +80,7 @@ class AdminPanelProvider extends PanelProvider
             ->databaseTransactions()
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder->items([
-                     NavigationItem::make('Home')
+                    NavigationItem::make('Home')
                         ->icon('heroicon-o-home')
                         ->isActiveWhen(fn (): bool => request()->routeIs('filament.admin.resources.boards.index'))
                         ->url(fn (): string => BoardResource::getUrl()),
@@ -100,7 +98,7 @@ class AdminPanelProvider extends PanelProvider
                     //         ->visible(fn (): bool => auth()->guest()),
                 ]);
             })
-      
+
             ->renderHook(
                 PanelsRenderHook::TOPBAR_BEFORE, // Argumen 1: Nama Hook
                 fn () => view('filament.hooks.greeting') // Argumen 2: Kontennya

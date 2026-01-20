@@ -15,8 +15,8 @@ class TopicInfolist
         return $schema
             ->components([
                 Grid::make([])
-                ->columnSpanFull()
-                ->extraAttributes(['class' => 'hidden p-0'])
+                    ->columnSpanFull()
+                    ->extraAttributes(['class' => 'hidden p-0']),
                 // TextEntry::make('board.name')
                 //     ->label('Board'),
                 // TextEntry::make('user.name')

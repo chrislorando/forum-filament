@@ -16,7 +16,7 @@ enum UserRank: string implements HasColor, HasIcon, HasLabel
     case HeroMember = 'hero_member';
     case Legendary = 'legendary';
 
-    public function getLabel(): string | Htmlable | null
+    public function getLabel(): string|Htmlable|null
     {
         return match ($this) {
             self::Newbie => 'Newbie',
@@ -28,7 +28,7 @@ enum UserRank: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Newbie => 'gray',
@@ -40,7 +40,7 @@ enum UserRank: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | Htmlable | null
+    public function getIcon(): string|Htmlable|null
     {
         return match ($this) {
             self::Newbie => 'heroicon-m-user',

@@ -18,8 +18,8 @@ class ListBoards extends ListRecords
         return [
             Action::make('Categories')
                 ->outlined()
-                ->url(fn()=>CategoryResource::getUrl())
-                ->visible(fn() => auth()->user()?->canManage()),
+                ->url(fn () => CategoryResource::getUrl())
+                ->visible(fn () => auth()->user()?->canManage()),
             CreateAction::make()
                 ->modal()
                 ->slideOver()
@@ -27,10 +27,10 @@ class ListBoards extends ListRecords
                 ->createAnother(false)
                 ->mutateDataUsing(function (array $data): array {
                     $data['slug'] = \Str::slug($data['name']);
-            
+
                     return $data;
                 })
-                ->visible(fn() => auth()->user()?->canManage()),
+                ->visible(fn () => auth()->user()?->canManage()),
         ];
     }
 }

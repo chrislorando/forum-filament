@@ -15,7 +15,7 @@ enum ReportReason: string implements HasColor, HasIcon, HasLabel
     case WrongBoard = 'wrong_board';
     case DuplicateTopic = 'duplicate_topic';
 
-    public function getLabel(): string | Htmlable | null
+    public function getLabel(): string|Htmlable|null
     {
         return match ($this) {
             self::Spam => 'Spam',
@@ -26,7 +26,7 @@ enum ReportReason: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Spam => 'danger',
@@ -37,7 +37,7 @@ enum ReportReason: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | Htmlable | null
+    public function getIcon(): string|Htmlable|null
     {
         return match ($this) {
             self::Spam => 'heroicon-m-inbox',
