@@ -248,7 +248,8 @@ class PostsRelationManager extends RelationManager
                         // $livewire->dispatch('refreshPostsRelationManager');
                         // $livewire->dispatch('refreshRelationManager');
                         // $livewire->dispatch('$refresh');
-                    }),
+                    })
+                    ->visible(fn ($record): bool => auth()->check() && auth()->user()?->canManage() ?? false),
                 // AssociateAction::make(),
             ])
             ->recordActions([
