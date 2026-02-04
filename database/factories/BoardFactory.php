@@ -26,13 +26,13 @@ class BoardFactory extends Factory
             'Community Events', 'Meme Coins', 'Yield Farming', 'Liquidity Mining',
         ];
 
-        $name = fake()->unique()->randomElement($names);
+        $name = fake()->randomElement($names);
 
         return [
             'category_id' => \App\Models\Category::factory(),
             'parent_id' => null,
             'name' => $name,
-            'slug' => str()->slug($name),
+            'slug' => str()->slug($name.' '.fake()->uuid()),
             'description' => fake()->optional()->paragraph(),
             'sort_order' => fake()->numberBetween(0, 10),
         ];

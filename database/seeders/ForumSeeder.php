@@ -20,13 +20,13 @@ class ForumSeeder extends Seeder
         $categories = Category::factory(5)->create();
 
         foreach ($categories as $category) {
-            $parentBoards = Board::factory(rand(2, 4))->create(['category_id' => $category->id, 'parent_id' => null]);
+            $parentBoards = Board::factory(rand(1, 2))->create(['category_id' => $category->id, 'parent_id' => null]);
 
             foreach ($parentBoards as $parentBoard) {
-                $childBoards = Board::factory(rand(2, 4))->create(['category_id' => $category->id, 'parent_id' => $parentBoard->id]);
+                $childBoards = Board::factory(rand(1, 2))->create(['category_id' => $category->id, 'parent_id' => $parentBoard->id]);
 
                 foreach ($childBoards as $board) {
-                    $topics = Topic::factory(rand(3, 10))->create(['board_id' => $board->id]);
+                    $topics = Topic::factory(rand(3, 5))->create(['board_id' => $board->id]);
 
                     foreach ($topics as $topic) {
                         Post::factory(1)->firstPost()->create([
@@ -34,7 +34,7 @@ class ForumSeeder extends Seeder
                             'user_id' => $topic->user_id,
                         ]);
 
-                        Post::factory(rand(2, 15))->create(['topic_id' => $topic->id]);
+                        Post::factory(rand(2, 10))->create(['topic_id' => $topic->id]);
                     }
                 }
             }
@@ -47,7 +47,7 @@ class ForumSeeder extends Seeder
                     'user_id' => $topic->user_id,
                 ]);
 
-                Post::factory(rand(2, 15))->create(['topic_id' => $topic->id]);
+                Post::factory(rand(2, 10))->create(['topic_id' => $topic->id]);
             }
         }
     }

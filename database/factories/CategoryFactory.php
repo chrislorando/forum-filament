@@ -24,11 +24,11 @@ class CategoryFactory extends Factory
             'Cosmos', 'Binance', 'Kripto Indonesia', 'Diskusi Umum', 'Berita',
         ];
 
-        $name = fake()->unique()->randomElement($names);
+        $name = fake()->randomElement($names);
 
         return [
             'name' => $name,
-            'slug' => str()->slug($name),
+            'slug' => str()->slug($name.' '.fake()->uuid()),
             'description' => fake()->optional(0.7)->paragraph(),
             'sort_order' => fake()->numberBetween(0, 10),
         ];
